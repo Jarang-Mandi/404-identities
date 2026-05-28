@@ -796,7 +796,7 @@ function resetSketch() {
 function startGifRecording() {
   if (isRecordingGif) return;
   isRecordingGif = true;
-  
+
   let gifBtn = select('#gif-btn');
   if (gifBtn) {
     gifBtn.html('⏳ Recording (4s)...');
@@ -807,10 +807,10 @@ function startGifRecording() {
   // 80 frames @ 20 FPS = 4 seconds.
   // This keeps memory usage low and drastically reduces computer lag during encoding.
   frameRate(20);
-  
+
   // Multiply speed by 3 (60/20) so the animation pace looks identical to 60fps
   speedMultiplier = speedSlider.value() * 3;
-  
+
   // Capture exactly 80 frames to be safe
   saveGif('cosmic_tapestry', 80, { units: 'frames', silent: true })
     .then(() => {
@@ -820,11 +820,11 @@ function startGifRecording() {
       console.error(e);
       finishGifRecording();
     });
-    
+
   // Visual feedback for encoding phase (80 frames at 20fps takes ~4 seconds)
   setTimeout(() => {
     if (isRecordingGif && gifBtn) {
-      gifBtn.html('⚙️ Encoding... (PC may pause)');
+      gifBtn.html('⚙️ Encoding...');
     }
   }, 4000);
 }
@@ -833,7 +833,7 @@ function finishGifRecording() {
   isRecordingGif = false;
   frameRate(60);
   speedMultiplier = speedSlider.value();
-  
+
   let gifBtn = select('#gif-btn');
   if (gifBtn) {
     gifBtn.html('🎞  Save GIF (4s)');
